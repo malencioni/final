@@ -1,0 +1,5 @@
+<h1>All Wineries</h1>
+
+<% for winery in @wineries %>
+    <p><a href="/wineries/<%= winery[:wid] %>"><%= winery[:name] %></a></p>
+<% end %>

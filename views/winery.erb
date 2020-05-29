@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-sm-9">
+
+    <h1><%= @winery[:name] %><a href="/winery/<%= @winery[:wid] %>/check_in/new" class="btn btn-primary">Check In</a></h1>
+    <p><%= @winery[:description] %></p>
+    <h5>Address</h5>
+    <p><%= @winery[:address1] %></p>
+    <p><%= @winery[:city]%>, <%= @winery[:state]%> <%= @winery[:zip]%></p>
+    <h5>Wines</h5>
+    
+    <% @winecategory_count = 1 %>
+
+    <% for categories in @winecategory_table %>
+    <% @this = @winecategory_table.where([:wcid] => @winecategory_count)%>
+    <h6><%= @this[:wcid][:description]%></h6>
+        <% for wine in @winerywines_table%>
+            <% @wines = @winetypes_table.where(:wtid => wine[:wtid]).where(:wcid => @winecategory_count).to_a[0]%>
+            <%  unless @wines.nil? %>
+            <p><%= @wines[:description] %></p>
+            <% end %>
+        <% end %>
+    <% @winecategory_count =  @winecategory_count + 1 %>
+    <%end%>
+
+    <a class="btn btn-primary" target="_blank" href="<%=@winery[:website]%>" role="button">Visit Website</a>
+    </div>
+
+</div>
