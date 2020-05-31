@@ -1,4 +1,9 @@
 <h1>Login</h1>
+<% if @new_guy_message.nil? %>
+<% else %>
+<h5><%=@new_guy_message%></h5>
+<%end%>
+
 
 <form action="/logins/create" method="POST">
   <div class="form-group">
@@ -11,3 +16,5 @@
   </div>
   <button type="submit" class="btn btn-primary">Sign In</button>
 </form>
+
+<p><a href="/users/new">Create an Account</a></p>

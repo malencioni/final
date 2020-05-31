@@ -15,3 +15,7 @@
 
       <label>Comments</label>
     <textarea class="form-control" rows="3" name="comments"></textarea>
+
+
+     <%= type[:vintage] %> <%= type[:name] %>: <%= type[:price] %>
+     @wine = winerywines_table.where(:wid => params["wid"]).to_a

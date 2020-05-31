@@ -11,18 +11,34 @@
     <% @winecategory_count = 1 %>
 
     <% for categories in @winecategory_table %>
-    <% @this = @winecategory_table.where([:wcid] => @winecategory_count)%>
-    <h6><%= @this[:wcid][:description]%></h6>
-        <% for wine in @winerywines_table%>
-            <% @wines = @winetypes_table.where(:wtid => wine[:wtid]).where(:wcid => @winecategory_count).to_a[0]%>
-            <%  unless @wines.nil? %>
-            <p><%= @wines[:description] %></p>
+    <% @wine_category = @winecategory_table.where([:wcid] => @winecategory_count)%>
+    <h6><%= @wine_category[:wcid][:description]%></h6>
+
+        <% for type in @winerywines_table%>
+            <% @wines_types = @winetypes_table.where(:wtid => type[:wtid]).where(:wcid => @winecategory_count).to_a[0]%>
+            <% unless @wines_types.nil? %>
+            <li><%= @wines_types[:description] %></li>
+
+
+
+
             <% end %>
+
+
         <% end %>
     <% @winecategory_count =  @winecategory_count + 1 %>
     <%end%>
-
-    <a class="btn btn-primary" target="_blank" href="<%=@winery[:website]%>" role="button">Visit Website</a>
+     <a class="btn btn-primary" target="_blank" href= "<%=@website%>" role="button">Visit Website</a>
     </div>
+
+</div>
+
+<div>
+<h5>Visits: <%= @visit_count %></h5>
+<h5>Rating: <%= @avg_rating %></h5>
+<h5>Reviews</h5>
+<% for comment in @review %>
+    <p><%= comment[:review]%></p>
+<% end %>
 
 </div>

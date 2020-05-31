@@ -19,7 +19,6 @@ after { puts; }                                                                 
 # rsvps_table = DB.from(:rsvps)
 wineries_table = DB.from(:wineries)
 favorites_table = DB.from(:favorites)
-ratings_table = DB.from(:ratings)
 regions_table = DB.from(:regions)
 visits_table = DB.from(:visits)
 users_table = DB.from(:users)
@@ -37,6 +36,7 @@ end
 get "/" do
     # before stuff runs
     @wineries = wineries_table.all
+    @regions_table = regions_table 
     view "wineries"
 end
 
@@ -48,11 +48,15 @@ get "/wineries/:wid" do
     # SELECT * FROM rsvps WHERE event_id=:id
     @visits = visits_table.where(:vid => params["vid"]).to_a
     # SELECT COUNT(*) FROM rsvps WHERE event_id=:id AND going=1
-    @count = visits_table.where(:wid => params["wid"]).count
+    @visit_count = visits_table.where(:wid => params["wid"]).count
     @winerywines_table = winerywines_table.where(:wid => params["wid"]).to_a
     @winetypes_table = winetypes_table
     @winecategory_table = winecategory_table
     @winecategory_count = 1
+    @sum_rating = visits_table.where(:wid => params["wid"]).sum(:rating)
+    @avg_rating = @sum_rating/@visit_count
+    @review = visits_table.where(:wid => params["wid"]).to_a
+    @website = @winery[:website]
     view "winery"
 end
 
@@ -109,14 +113,21 @@ end
 # Form to create a new checkin
 get "/winery/:wid/check_in/new" do
     @winery = wineries_table.where(:wid => params["wid"]).to_a[0]
-    view "new_checkin"
+    if @current_user.nil?
+        @new_guy_message = "You must be logged in to check in to a winery"
+        view "new_login"
+    else
+        view "new_checkin"
+    end
 end
 
-# Receiving end of new RSVP form
+# Receiving end of new checkin form
 post "/winery/:wid/check_in/create" do
     visits_table.insert(:wid => params["wid"],
                     :uid => @current_user[:uid],
-                    :visit_date => params["date"])
+                    :visit_date => params["date"],
+                    :rating => params["rating"],
+                    :review => params["review"])
     @winery = wineries_table.where(:wid => params["wid"]).to_a[0]
     view "create_checkin"
 end

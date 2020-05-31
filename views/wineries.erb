@@ -1,5 +1,12 @@
 <h1>All Wineries</h1>
 
-<% for winery in @wineries %>
-    <p><a href="/wineries/<%= winery[:wid] %>"><%= winery[:name] %></a></p>
+<% @wineregion_count = 1 %>
+<% for region in @regions_table %>
+    <h3><%= region[:description]%></h3>
+        <% for winery in @wineries %>
+        <% if winery[:reid] == @wineregion_count then%>
+            <p><a href="/wineries/<%= winery[:wid] %>"><%= winery[:name] %></a></p>
+        <%end%>
+        <% end %>
+        <% @wineregion_count =  @wineregion_count + 1 %>
 <% end %>

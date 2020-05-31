@@ -3,9 +3,17 @@
 <h1>Check In at <%= @winery[:name] %></h1>
 
 <form action="/winery/<%= @winery[:wid] %>/check_in/create" method="POST">
-  <div class="form-group">
-    <label>What Day Did You Go?</label>
-    <input type="date" class="form-control" name="date">
-  </div>
+    <div class="form-group">
+        <label>What Day Did You Go?</label>
+        <input type="date" class="form-control" name="date">
+    </div>
+    <div class="form-group">    
+        <label>How was it?</label>
+        <input type="number" class="form-control" placeholder = "Review" name="rating">
+    </div>
+    <div class="form-group">  
+        <textarea class="form-control" rows="3" name="review" placeholder="Comments"></textarea>
+    </div>
+   
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
