@@ -1,12 +1,32 @@
-<h1>All Wineries</h1>
+
+
 
 <% @wineregion_count = 1 %>
-<% for region in @regions_table %>
-    <h3><%= region[:description]%></h3>
-        <% for winery in @wineries %>
-        <% if winery[:reid] == @wineregion_count then%>
-            <p><a href="/wineries/<%= winery[:wid] %>"><%= winery[:name] %></a></p>
-        <%end%>
-        <% end %>
-        <% @wineregion_count =  @wineregion_count + 1 %>
-<% end %>
+<div class="background">
+    <div class="caption">
+        <div class="container">
+            <div class="row justify-content-center">
+            <h1 class="fade-in">Pick Your Region, Find Your Winery</h1>
+            </div>
+            <div class="row justify-content-center">
+                <% for region in @regions_table %>
+                    <div class="col-auto">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <%= region[:description]%>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <% for winery in @wineries %>
+                                <% if winery[:reid] == @wineregion_count then%>
+                                    <a class="dropdown-item" href="/wineries/<%= winery[:wid] %>"><%= winery[:name] %></a>
+                                <%end%>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    <% @wineregion_count =  @wineregion_count + 1 %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

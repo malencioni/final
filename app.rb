@@ -29,6 +29,8 @@ winerywines_table = DB.from(:winerywines)
 before do
     # SELECT * FROM users WHERE id = session[:user_id]
     @current_user = users_table.where(:uid => session[:uid]).to_a[0]
+    @wineries = wineries_table.all
+    @regions_table = regions_table 
     puts @current_user.inspect
 end
 

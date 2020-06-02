@@ -1,0 +1,96 @@
+
+.fade-in {
+    animation: fadeIn ease 2s;
+    -webkit-animation: fadeIn ease 2s;
+    -moz-animation: fadeIn ease 2s;
+    -o-animation: fadeIn ease 2s;
+    -ms-animation: fadeIn ease 2s;
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-o-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+  }
+}
+
+.background {
+    background-image: url("images/background.jpg"); /* The image used */
+    background-color: black; /* Used if the image is unavailable */
+    height: 850px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+  .caption  {
+    left: 0;
+    position: absolute;
+    top: 300px;
+    width: 100%;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    font-size: xx-large;
+  }
+
+  .mt-5 {
+      max-width: 100%;
+      padding: 0px;
+      margin-top: 0rem!important;
+  }
+
+.box-float {
+    padding: 15px;
+    background-color: white;
+}
+
+.main-contain {
+    padding-top: 30px;
+}
+
+.nobull {
+    list-style-type: none;
+    padding:0px;
+}
+
+.pic-border {
+    padding-bottom: 10px;
+}

@@ -32,6 +32,7 @@ DB.create_table! :wineries do
   String :state
   String :zip
   String :website
+  String :image
 end
 
 DB.create_table! :favorites do
@@ -97,7 +98,8 @@ wineries_table.insert(reid: "1",
                     city: "Calistoga",
                     state: "CA",
                     zip: "94515",
-                    website: "https://www.sterlingvineyards.com/en-us")
+                    website: "https://www.sterlingvineyards.com/en-us",
+                    image: "sterling")
 
 wineries_table.insert(reid: "1",
                     name: "Inglenook Vineyard",
@@ -106,7 +108,8 @@ wineries_table.insert(reid: "1",
                     city: "Rutherford",
                     state: "CA",
                     zip: "94573",
-                    website: "https://www.inglenook.com")
+                    website: "https://www.inglenook.com",
+                    image: "inglenook")
 
 wineries_table.insert(reid: "1",
                     name: "Silver Oak",
@@ -115,7 +118,8 @@ wineries_table.insert(reid: "1",
                     city: "Oakville",
                     state: "CA",
                     zip: "94562",
-                    website: "https://silveroak.com")
+                    website: "https://silveroak.com",
+                    image: "silveroak")
 
 wineries_table.insert(reid: "2",
                     name: "Square Peg",
@@ -124,7 +128,8 @@ wineries_table.insert(reid: "2",
                     city: "Sebastopol",
                     state: "CA",
                     zip: "95472",
-                    website: "https://squarepegwinery.com")
+                    website: "https://squarepegwinery.com",
+                    image: "squarepeg")
                     
 wineries_table.insert(reid: "2",
                     name: "Jordan Winery",
@@ -133,7 +138,8 @@ wineries_table.insert(reid: "2",
                     city: "Healdsburg",
                     state: "CA",
                     zip: "95448",
-                    website: "https://www.jordanwinery.com")
+                    website: "https://www.jordanwinery.com",
+                    image: "jordan")
 
 wineries_table.insert(reid: "2",
                     name: "Coppola Winery",
@@ -142,7 +148,8 @@ wineries_table.insert(reid: "2",
                     city: "Geyserville",
                     state: "CA",
                     zip: "95441",
-                    website: "https://www.francisfordcoppolawinery.com")
+                    website: "https://www.francisfordcoppolawinery.com",
+                    image: "francis")
 
 winerywines_table = DB.from(:winerywines)
 winerywines_table.insert(wid: "1",

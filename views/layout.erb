@@ -23,13 +23,30 @@
   <body>
 
   <!-- Nav Bar -->
+    <% @wineregion_count = 1 %>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="/">EventBite</a>
+            <a class="navbar-brand" href="/">Winery Guide</a>
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
+                <!-- <li class="nav-item"> -->
+                    <!-- <a class="nav-link" href="/">Home</a> -->
+                <!-- </li> -->
+                <% for region in @regions_table %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <%= region[:description]%>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <% for winery in @wineries %>
+                                <% if winery[:reid] == @wineregion_count then%>
+                                <a class="dropdown-item" href="/wineries/<%= winery[:wid] %>"><%= winery[:name] %></a>
+                                <%end%>
+                            <% end %>
+                        </div>
+                    </li>
+                        
+                    <% @wineregion_count =  @wineregion_count + 1 %>
+                <% end %>
                 <% if @current_user.nil? %>
                 <li class="nav-item">
                     <a class="nav-link" href="/users/new">Sign Up</a>
