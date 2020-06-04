@@ -70,12 +70,10 @@ end
 
 # Receiving end of new user form
 post "/users/create" do
-    @user_email = users_table[:email]
-    @entered_email = params["email"]
-    if @users_email.include? @entered_email
-        @you_exist_message
-        view "new_login"
-    else
+    @email_exists = users_table.where(:email => params["email"]).to_a[0]
+        puts @email_exists
+
+    if @email_exists.nil?
         users_table.insert(:fname => params["fname"],
                     :lname => params["lname"],
                     :email => params["email"],
@@ -84,6 +82,9 @@ post "/users/create" do
                     :state => params["state"],
                                 )
         view "create_user"
+    else
+        @you_exist_message = "Email address already associated with an account, please login."
+        view "new_login"
     end
 end
 
