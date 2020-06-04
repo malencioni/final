@@ -59,6 +59,7 @@ get "/wineries/:wid" do
     @avg_rating = @sum_rating/@visit_count
     @review = visits_table.where(:wid => params["wid"]).to_a
     @website = @winery[:website]
+    @winerycategories = winecategory_table.where([:wcid] => winetypes_table[:wcid]).where(winetypes_table[:wtid] => winerywines_table[:wtid]).where(winerywines_table[:wid] => params["wid"])
     view "winery"
 end
 
