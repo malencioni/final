@@ -77,7 +77,7 @@ DB.create_table! :winerywines do
 end
 
 DB.create_table! :winecategory do
-    foreign_key :wcid
+    primary_key :wcid
     String :description
 end
 
