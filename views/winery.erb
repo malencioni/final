@@ -12,20 +12,13 @@
                     <h1><%= @winery[:name] %><span class="pull-right" style="padding-left: 20px;">
                     <a href="/winery/<%= @winery[:wid] %>/check_in/new" class="btn btn-primary" style="padding: 4px; font-size: 15px;">Check In</a></span></h1>
                     <p><%= @winery[:description] %></p>
-                    <h5>Address</h5>
-                    <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=<%= @winery[:address1]%>+<%= @winery[:city]%> + <%= @winery[:state]%> + <%= @winery[:zip]%>"><%= @winery[:address1]%>, <%= @winery[:city]%>, <%= @winery[:state]%> <%= @winery[:zip]%></a>
-                    <div class="row" style="padding-top: 10px;" >
-                        <div class="col">
-                            <a class="btn btn-primary" target="_blank" href= "<%=@website%>" role="button" style="padding: 4px; font-size: 12px;">Visit Website</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
         <div class="container" style="padding-top:30px;">
             <div class="row">
                 <div class="col">
-                    <h5>Wines</h5>
+                    <h4>Wines</h4>
                 </div>      
             </div>
             <div class="row" style="padding-top:10px;">
@@ -34,12 +27,12 @@
                 <% for categories in @winecategory_table %>
                     <div class="col">
                         <% @wine_category = @winecategory_table.where([:wcid] => @winecategory_count)%>
-                        <h6><%= @wine_category[:wcid][:description]%></h6>
+                        <h5 class="border-bottom"><%= @wine_category[:wcid][:description]%></h5>
                         <ul class="nobull">
                             <% for type in @winerywines_table%>
                                 <% @wines_types = @winetypes_table.where(:wtid => type[:wtid]).where(:wcid => @winecategory_count).to_a[0]%>
                                 <% unless @wines_types.nil? %>
-                                <li><%= @wines_types[:description] %></li>
+                                <li style="font-size:15px;"><%= @wines_types[:description] %></li>
                             <% end %>
 
                         <% end %>
@@ -62,16 +55,19 @@
 
 </div>
 <div class="row">
-    <div class="col-7">
+    <div class="col-lg-7">
         <div class="container">
-            <h5>Reviews</h5>
+            <h5 style="margin-bottom: 0rem; margin-top: 1.5rem;">Reviews<span class="pull-right" style="padding-left: 10px;">
+            <a style="font-size: 12px;">Rating: <%= @avg_rating %></a>
+            </span></h5>
+            <p style="margin-bottom: 0.5rem;">Visits: <%= @visit_count %></p>
             <% for comment in @review %>
-                <div class="container" style="border-style: solid; border-width: thin; border-radius:8px;">
+                <div class="container border-top">
                 <% @reviewers = @users_table.where(:uid => comment[:uid]).to_a[0]%>
                 <% unless @reviewers.nil? %>
                     <div style="padding-top:5px;">
                     <a><%= comment[:rating] %></a>
-                    <p style="padding-top:5px;"><%= comment[:review] %></p>
+                    <p style="padding-top:5px; padding-bottom:5px"><%= comment[:review] %></p>
                     <% if @current_user.nil? %>
                         <p style="text-align:right; font-style: italic; font-size:15px">name hidden</p>
                     <%else%>
@@ -83,16 +79,14 @@
             <% end %>
         </div>
     </div>
-    <div class="col-5">
-        <div class="container" style="border-style: solid; border-width: thin">
-            <div class="row">
-                <div class="col">
-                    <h4>Stats</h4>
-                    <h5>Visits: <%= @visit_count %></h5>
-                    <h5>Rating: <%= @avg_rating %></h5>
-                </div>
-            </div>
-        </div>
+    <div class="col-lg-5">
+        <h4>Address</h4>
+                    <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=<%= @winery[:address1]%>+<%= @winery[:city]%> + <%= @winery[:state]%> + <%= @winery[:zip]%>"><%= @winery[:address1]%>, <%= @winery[:city]%>, <%= @winery[:state]%> <%= @winery[:zip]%></a>
+                    <div class="row" style="padding-top: 10px;" >
+                        <div class="col">
+                            <a class="btn btn-primary" target="_blank" href= "<%=@website%>" role="button" style="padding: 4px; font-size: 12px;">Visit Website</a>
+                        </div>
+                    </div>
     </div>
 </div>
 

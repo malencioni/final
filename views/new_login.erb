@@ -8,7 +8,10 @@
 <% else %>
 <h5><%=@new_guy_message%></h5>
 <%end%>
-
+<% if @you_exist_message.nil? %>
+<% else %>
+<h5><%=@@you_exist_message%></h5>
+<%end%>
 
 <form action="/logins/create" method="POST">
   <div class="form-group">

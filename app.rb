@@ -70,14 +70,22 @@ end
 
 # Receiving end of new user form
 post "/users/create" do
-    users_table.insert(:fname => params["fname"],
+    @user_email = users_table[:email]
+    @entered_email = params["email"]
+    puts @entered_email
+    if @users_email.include? @entered_email
+        @you_exist_message
+        view "new_login"
+    else
+        users_table.insert(:fname => params["fname"],
                     :lname => params["lname"],
                     :email => params["email"],
-                    :password => params["password"],
+                    :password => BCrypt::Password.create(params["password"]),
                     :city => params["city"],
                     :state => params["state"],
                                 )
-    view "create_user"
+        view "create_user"
+    end
 end
 
 
@@ -96,7 +104,7 @@ post "/logins/create" do
     if user
         puts user.inspect
         # test the password against the one in the users table
-        if user[:password] == password_entered
+        if BCrypt::Password.new(user[:password]) == password_entered
             session[:uid] = user[:uid]
             view "create_login"
         else
@@ -109,6 +117,7 @@ end
 
 # Logout
 get "/logout" do
+    session[:uid] = nil
     view "logout"
 end
 
