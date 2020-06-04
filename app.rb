@@ -72,7 +72,6 @@ end
 post "/users/create" do
     @user_email = users_table[:email]
     @entered_email = params["email"]
-    puts @entered_email
     if @users_email.include? @entered_email
         @you_exist_message
         view "new_login"
