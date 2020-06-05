@@ -1,5 +1,3 @@
-
-
 <div class="background">
 <div class="container main-contain">
 <div class="container box-float">
@@ -27,8 +25,8 @@
 
                 <% for categories in @winecategory_table %>
                     <div class="col">
-                         <% @wine_category = @winecategory_table.where([:wcid] => @winecategory_count).to_a[0]%>
-                         <h5 class="border-bottom"> <%= @wine_category[:description] %></h5>
+                        <% @wine_category = @winecategory_table.where([:wcid] => @winecategory_count).to_a[0]%>
+                        <h5 class="border-bottom"> <%= @wine_category[:description] %></h5>
                         <ul class="nobull">
                             <% for type in @winerywines_table%>
                                 <% @wines_types = @winetypes_table.where(:wtid => type[:wtid]).where(:wcid => @winecategory_count).to_a[0]%>
