@@ -19,3 +19,14 @@
 
      <%= type[:vintage] %> <%= type[:name] %>: <%= type[:price] %>
      @wine = winerywines_table.where(:wid => params["wid"]).to_a
+
+
+     <% for wine in @winerywines_table%>
+                            <% @wine_types = @winetypes_table.where(:wtid => wine[:wtid]).where(:wcid => @winecategory_count).to_a[0]%>
+                            <% unless @wine_types.nil? %>
+                                <% @winery_wine_categories = @winecategory_table.where(:wcid => @wine_types[:wcid]).to_a[0] %>
+                                    <% unless @winery_wine_categories.nil? %>
+                                        <h5 class="border-bottom"> <%= @winery_wine_categories[:description] %></h5>
+                                    <%end%>
+                            <%end%>
+                        <%end%>

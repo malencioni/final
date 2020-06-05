@@ -27,6 +27,7 @@
 
                 <% for categories in @winecategory_table %>
                     <div class="col">
+                        <% @wine_category = @winecategory_table.where([:wcid] => @winecategory_count)%>
                          <% @wine_category = @winecategory_table.where([:wcid] => @winecategory_count).to_a[0]%>
                          <h5 class="border-bottom"> <%= @wine_category[:description] %></h5>
                         <ul class="nobull">
