@@ -1,9 +1,9 @@
-<div class="background">
-<div class="container main-contain">
+
+
 <div class="container box-float">
 
 <div class="row">
-    <div class="col-7">
+    <div class="col-lg-7">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <div class="col-5">
+    <div class="col">
         <div class="row">
             <div class="col">
                 <img src="/images/<%=@winery[:image]%>.jpg" class="img-fluid" style="padding-bottom:10px;" alt="Responsive image">
@@ -79,13 +79,21 @@
         </div>
     </div>
     <div class="col-lg-5">
-        <h4>Address</h4>
-                    <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=<%= @winery[:address1]%>+<%= @winery[:city]%> + <%= @winery[:state]%> + <%= @winery[:zip]%>"><%= @winery[:address1]%>, <%= @winery[:city]%>, <%= @winery[:state]%> <%= @winery[:zip]%></a>
-                    <div class="row" style="padding-top: 10px;" >
-                        <div class="col">
-                            <a class="btn btn-primary" target="_blank" href= "<%=@website%>" role="button" style="padding: 4px; font-size: 12px;">Visit Website</a>
-                        </div>
-                    </div>
+        <div class="map-responsive">
+            <iframe
+                width="435"
+                height="250"
+                frameborder="0" 
+                style="border:0"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw&q=<%= @winery[:address1]%>+<%= @winery[:city]%> + <%= @winery[:state]%> + <%= @winery[:zip]%>&zoom=15" allowfullscreen>
+            </iframe>
+        </div>
+            <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=<%= @winery[:address1]%>+<%= @winery[:city]%> + <%= @winery[:state]%> + <%= @winery[:zip]%>"><%= @winery[:address1]%>, <%= @winery[:city]%>, <%= @winery[:state]%> <%= @winery[:zip]%></a>
+            <div class="row" style="padding-top: 10px;" >
+                <div class="col">
+                    <a class="btn btn-primary" target="_blank" href= "<%=@website%>" role="button" style="padding: 4px; font-size: 12px;">Visit Website</a>
+                </div>
+            </div>
     </div>
 </div>
 

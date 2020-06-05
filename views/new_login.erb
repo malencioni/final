@@ -1,16 +1,20 @@
-<div class="background">
-<div class="container" style="padding-top:30px;">
+<style>
+  body, html {
+      height:100%;
+      margin:0;
+  }
+</style>
 <div class="container box-float">
 
 
 <h1>Login</h1>
 <% if @new_guy_message.nil? %>
 <% else %>
-<h5><%=@new_guy_message%></h5>
+<h5 class="error-code"><%=@new_guy_message%></h5>
 <%end%>
 <% if @you_exist_message.nil? %>
 <% else %>
-<h5><%=@you_exist_message%></h5>
+<h5 class="error-code"> <%=@you_exist_message%></h5>
 <%end%>
 
 <form action="/logins/create" method="POST">
@@ -22,7 +26,8 @@
     <label>Password</label>
     <input type="password" class="form-control" name="password">
   </div>
+  <span>
   <button type="submit" class="btn btn-primary">Sign In</button>
+  <a href="/users/new" class="btn btn-primary btn-grey"   style="margin-right: 0.2rem;">Sign Up</a>
+  </span>
 </form>
-
-<p><a href="/users/new">Create an Account</a></p>

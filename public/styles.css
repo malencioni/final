@@ -51,13 +51,21 @@
   }
 }
 
+
 .background {
     background-image: url("images/background.jpg"); /* The image used */
     background-color: black; /* Used if the image is unavailable */
-    height: 850px; /* You must set a specified height */
+    height: 100%; /* You must set a specified height */
     background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
+    background-repeat: no-repeat;
     background-size: cover; /* Resize the background image to cover the entire container */
+    background-attachment: fixed;
+    padding-bottom: 100px;
+}
+
+.jumbotron {
+    padding: 0rem;
+    margin-bottom: 0rem;
 }
 
   .caption  {
@@ -80,6 +88,7 @@
 .box-float {
     padding: 15px;
     background-color: white;
+    margin-top: 1rem;
 }
 
 .main-contain {
@@ -94,3 +103,113 @@
 .pic-border {
     padding-bottom: 10px;
 }
+
+.btn {
+    background-color: #8e048e;
+    border-color: #8e048e;
+}
+
+.btn-primary:hover {
+    background-color: #480148;
+    border-color: #480148;
+    color: white;
+}
+
+.btn-primary:focus {
+    background-color: #480148 !important;
+    border-color: #480148 !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+.dropdown-item:focus {
+    background-color: #8e048e !important;
+    border-color: #8e048e !important;
+    color: black !important;
+    box-shadow: none !important;
+}
+
+.dropdown-item:hover {
+    background-color: rgb(250, 242, 250) !important;
+    border-color: rgb(250, 242, 250) !important;
+    box-shadow: none !important;
+}
+
+.btn-secondary {
+    background-color: #8e048e !important;
+    border-color: #8e048e !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+.btn-grey {
+    background-color:grey !important; 
+    border-color:grey !important; 
+}
+
+.btn-grey:hover {
+    background-color: #480148 !important;
+    border-color: #480148 !important;
+    color: white !important;
+}
+
+.cursive {
+  font-family: 'Dancing Script', 'cursive';
+}
+
+.font_thin {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+}
+
+.font_less_thin {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+}
+
+.font_time {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+}
+
+.error-code {
+    color: red;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+.bg-light {
+    background-color: #480148 !important;
+}
+
+.nav-link {
+    color: white !important;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+}
+
+.navbar-text {
+    color: white !important;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+}
+
+
+.map-responsive{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+.map-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+

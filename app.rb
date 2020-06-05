@@ -52,6 +52,7 @@ get "/wineries/:wid" do
     # SELECT COUNT(*) FROM rsvps WHERE event_id=:id AND going=1
     @visit_count = visits_table.where(:wid => params["wid"]).count
     @winerywines_table = winerywines_table.where(:wid => params["wid"]).to_a
+    @winerywines_table2 = winerywines_table
     @winetypes_table = winetypes_table
     @winecategory_table = winecategory_table
     @winecategory_count = 1
@@ -75,12 +76,12 @@ post "/users/create" do
 
     if @email_exists.nil?
         users_table.insert(:fname => params["fname"],
-                    :lname => params["lname"],
-                    :email => params["email"],
-                    :password => BCrypt::Password.create(params["password"]),
-                    :city => params["city"],
-                    :state => params["state"],
-                                )
+            :lname => params["lname"],
+            :email => params["email"],
+            :password => BCrypt::Password.create(params["password"]),
+            :city => params["city"],
+            :state => params["state"],
+                        )
         view "create_user"
     else
         @you_exist_message = "Email address already associated with an account, please login."

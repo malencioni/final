@@ -8,6 +8,9 @@
     <!-- Google Fonts -->
     <!-- Swap out "Roboto" for the font(s) you want to use -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" crossorigin="anonymous">
@@ -23,11 +26,15 @@
   <body>
 
   <!-- Nav Bar -->
-    <% @wineregion_count = 1 %>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <% @wineregion_count = 1 %>    
+<div class="jumbotron background">
+<div class="container mt-5">
+<div class="container main-contain" style="padding-top:0px;" >
+
+    <nav class="navbar navbar-expand-lg bg-light">
         <div class="container">
-            <a class="navbar-brand" href="/">Winery Guide</a>
-            <ul class="navbar-nav mr-auto">
+            <a class="navbar-brand font-less-thin" href="/"><i class="fas fa-wine-bottle"></i> Winery Guide<i class="fas fa-wine-bottle fa-flip-horizontal"></i></a>
+            <ul class="font_thin navbar-nav mr-auto">
                 <!-- <li class="nav-item"> -->
                     <!-- <a class="nav-link" href="/">Home</a> -->
                 <!-- </li> -->
@@ -60,7 +67,7 @@
             <% if @current_user %>
                 <ul class="navbar-nav ml-auto">
                     <li class="navbar-text">
-                        Logged in as <%= @current_user[:fname] %>
+                        Logged in as <%= @current_user[:fname] %> | 
                     </li>
                     <li class="nav-item">
                         <a href="/logout" class="nav-link">Logout</a>
@@ -68,13 +75,17 @@
                 </ul>
             <% end %>
         </div>
-    </div>
 
     </nav>
 
     <div class="container mt-5">
       <%= yield %>
     </div>
+    <div class="container" style="padding-bottom: 50px;">
+    </div>
+
+</div>
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

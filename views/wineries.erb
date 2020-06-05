@@ -1,18 +1,22 @@
-
-
+<style>
+  body, html {
+      height:100%;
+      margin:0;
+  }
+</style>
 
 <% @wineregion_count = 1 %>
-<div class="background">
+<div class="container">
     <div class="caption">
         <div class="container">
             <div class="row justify-content-center">
-            <h1 class="fade-in">Pick Your Region, Find Your Winery</h1>
+            <h1 class="fade-in cursive">Pick Your Region, Find Your Winery</h1>
             </div>
             <div class="row justify-content-center">
                 <% for region in @regions_table %>
                     <div class="col-auto">
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="font_less_thin btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <%= region[:description]%>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
