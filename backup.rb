@@ -66,6 +66,8 @@ get "/wineries/:wid" do
     @review = visits_table.where(:wid => params["wid"]).to_a
     @website = @winery[:website]
     @test_number = 1
+    @sent_message = nil
+
 
     view "winery"
 end
@@ -86,7 +88,6 @@ post "/users/create" do
             :lname => params["lname"],
             :email => params["email"],
             :password => BCrypt::Password.create(params["password"]),
-            :phone => params["phone"],
             :city => params["city"],
             :state => params["state"],
                         )
@@ -170,24 +171,8 @@ get "/send_text/:wid" do
     @review = visits_table.where(:wid => params["wid"]).to_a
     @website = @winery[:website]
     @test_number = 1
-    @winery_name_table = wineries_table.where(:wid => params["wid"]).to_a[0]
-    
-    if @current_user.nil?
-        @sign_in_first = "You need to sign in first"
-    elsif
-        @sent_message.nil?
-        @user_phone = @current_user[:phone]
-        @number = "+1".concat(@user_phone)
-        @sms_body = @winery_name_table[:name].concat(" - ").concat(@winery[:address1]).concat(", ").concat(@winery[:city]).concat(", ").concat(@winery[:state]).concat(" ").concat(@winery[:zip]).concat(" - ").concat(@winery[:website])
-        @sent_message = "Your message has been sent"
-        client.messages.create(
-            from: "+12013576950", 
-            to: @number,
-            body: @sms_body
-            )
-    else   
-        @sent_message = "Your message has been sent"
-    end
+    @sent_message = "Your message has been sent"
     view "winery"
+
 end
     

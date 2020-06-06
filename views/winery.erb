@@ -93,7 +93,15 @@
                 <div class="col">
                     <span>
                     <a class="btn btn-primary font_less_thin" target="_blank" href= "<%=@website%>" role="button" style="padding: 4px; font-size: 12px;">Visit Website</a>
-                    <a class="btn btn-primary font_less_thin" href= "/send_text" role="button" style="padding: 4px; font-size: 12px;">Send Link to my Phone</a>
+                    <% if @sign_in_first.nil? %>
+                        <% if @sent_message.nil? %>
+                            <a class="btn btn-primary font_less_thin" href= "/send_text/<%= params[:wid] %>" role="button" style="padding: 4px; font-size: 12px;">Send Link to my Phone</a>
+                        <% else %>
+                            <a style="color: green;"><%=@sent_message%> <i class="fas fa-check"></i></a>
+                        <%end%>
+                    <% else %>
+                        <a style="color: red;" href= "/logins/new"><i class="fas fa-times"></i> <%=@sign_in_first%></a>
+                    <% end %>
                     </span>
                 </div>
             </div>

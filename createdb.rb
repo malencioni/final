@@ -61,6 +61,7 @@ DB.create_table! :users do
     String :lname
     String :email
     String :password
+    String :phone
     String :city
     String :state
 end
@@ -291,6 +292,7 @@ users_table.insert(fname: "Jim",
                 lname: "Cotton",
                 email: "jcotton@demo.com",
                 password: "test",
+                phone: "+11231231234",
                 city: "Demoville",
                 state: "IL"
                 )
@@ -299,6 +301,7 @@ users_table.insert(fname: "John",
                 lname: "Smith",
                 email: "jsmith@demo.com",
                 password: "test",
+                phone: "+11231231234",
                 city: "Demoville",
                 state: "IL"
                 )
