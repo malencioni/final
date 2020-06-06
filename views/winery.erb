@@ -7,16 +7,16 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1><%= @winery[:name] %><span class="pull-right" style="padding-left: 20px;">
-                    <a href="/winery/<%= @winery[:wid] %>/check_in/new" class="btn btn-primary" style="padding: 4px; font-size: 15px;">Check In</a></span></h1>
-                    <p><%= @winery[:description] %></p>
+                    <h1 class="font_less_thin"><%= @winery[:name] %><span class="pull-right" style="padding-left: 20px;">
+                    <a href="/winery/<%= @winery[:wid] %>/check_in/new" class="btn btn-primary font_less_thin" style="padding: 4px; font-size: 15px;">Check In</a></span></h1>
+                    <p class="font_thin"><%= @winery[:description] %></p>
                 </div>
             </div>
         </div>
         <div class="container" style="padding-top:30px;">
             <div class="row">
                 <div class="col">
-                    <h4>Wines</h4>
+                    <h4 class="font_less_thin">Wines</h4>
                 </div>      
             </div>
             <div class="row" style="padding-top:10px;">
@@ -26,12 +26,12 @@
                 <% for categories in @winecategory_table %>
                     <div class="col">
                         <% @wine_category = @winecategory_table.where([:wcid] => @winecategory_count).to_a[0]%>
-                        <h5 class="border-bottom"> <%= @wine_category[:description] %></h5>
+                        <h5 class="border-bottom font_less_thin"> <%= @wine_category[:description] %></h5>
                         <ul class="nobull">
                             <% for type in @winerywines_table%>
                                 <% @wines_types = @winetypes_table.where(:wtid => type[:wtid]).where(:wcid => @winecategory_count).to_a[0]%>
                                 <% unless @wines_types.nil? %>
-                                <li style="font-size:15px;"><%= @wines_types[:description] %></li>
+                                <li class="font_thin" style="font-size:15px;"><%= @wines_types[:description] %></li>
                             <% end %>
 
                         <% end %>
@@ -56,7 +56,7 @@
 <div class="row">
     <div class="col-lg-7">
         <div class="container">
-            <h5 style="margin-bottom: 0rem; margin-top: 1.5rem;">Reviews<span class="pull-right" style="padding-left: 10px;">
+            <h5 class="font_less_thin" style="margin-bottom: 0rem; margin-top: 1.5rem;">Reviews<span class="pull-right" style="padding-left: 10px;">
             <a style="font-size: 12px;">Rating: <%= @avg_rating %></a>
             </span></h5>
             <p style="margin-bottom: 0.5rem;">Visits: <%= @visit_count %></p>
@@ -66,11 +66,11 @@
                 <% unless @reviewers.nil? %>
                     <div style="padding-top:5px;">
                     <a><%= comment[:rating] %></a>
-                    <p style="padding-top:5px; padding-bottom:5px"><%= comment[:review] %></p>
+                    <p class="font_thin" style="padding-top:5px; padding-bottom:5px"><%= comment[:review] %></p>
                     <% if @current_user.nil? %>
-                        <p style="text-align:right; font-style: italic; font-size:15px">name hidden</p>
+                        <p class="font_thin" style="text-align:right; font-style: italic; font-size:15px">name hidden</p>
                     <%else%>
-                        <p style="text-align:right; font-style: italic; font-size:15px">-<%= @reviewers[:fname]%> <%= @reviewers[:lname]%></p>
+                        <p class="font_thin" style="text-align:right; font-style: italic; font-size:15px">-<%= @reviewers[:fname]%> <%= @reviewers[:lname]%></p>
                     <%end%>
                     </div>
                 <%end%>
@@ -91,7 +91,7 @@
             <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=<%= @winery[:address1]%>+<%= @winery[:city]%> + <%= @winery[:state]%> + <%= @winery[:zip]%>"><%= @winery[:address1]%>, <%= @winery[:city]%>, <%= @winery[:state]%> <%= @winery[:zip]%></a>
             <div class="row" style="padding-top: 10px;" >
                 <div class="col">
-                    <a class="btn btn-primary" target="_blank" href= "<%=@website%>" role="button" style="padding: 4px; font-size: 12px;">Visit Website</a>
+                    <a class="btn btn-primary font_less_thin" target="_blank" href= "<%=@website%>" role="button" style="padding: 4px; font-size: 12px;">Visit Website</a>
                 </div>
             </div>
     </div>

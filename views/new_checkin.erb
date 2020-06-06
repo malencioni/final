@@ -4,10 +4,11 @@
       margin:0;
   }
 </style>
+
 <div class="container box-float">
 
 <h1>Check In at <%= @winery[:name] %></h1>
-
+<div class="col-6">
 <form action="/winery/<%= @winery[:wid] %>/check_in/create" method="POST">
     <div class="form-group">
         <label>What Day Did You Go?</label>

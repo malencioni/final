@@ -15,6 +15,11 @@ before { puts; puts "--------------- NEW REQUEST ---------------"; puts }       
 after { puts; }                                                                       #
 #######################################################################################
 
+account_sid = ENV["TWILIO_ACCOUNT_SID"]
+auth_token = ENV["TWILIO_AUTH_TOKEN"]
+client = Twilio::REST::Client.new(account_sid, auth_token)
+
+
 # events_table = DB.from(:events)
 # rsvps_table = DB.from(:rsvps)
 wineries_table = DB.from(:wineries)
