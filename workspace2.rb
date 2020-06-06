@@ -94,3 +94,5 @@
 </div>
 </div>
 </div>
+
+<button class="btn btn-primary font_less_thin" style="padding: 4px; font-size: 12px;" onclick="<%number_test%>">Send Link to my Phone</button>

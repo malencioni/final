@@ -17,7 +17,7 @@ after { puts; }                                                                 
 
 account_sid = ENV["TWILIO_ACCOUNT_SID"]
 auth_token = ENV["TWILIO_AUTH_TOKEN"]
-client = Twilio::REST::Client.new(account_sid, auth_token)
+
 
 
 # events_table = DB.from(:events)
@@ -65,6 +65,9 @@ get "/wineries/:wid" do
     @avg_rating = @sum_rating/@visit_count
     @review = visits_table.where(:wid => params["wid"]).to_a
     @website = @winery[:website]
+    @phone_number = "+16306772817"
+    @test_number = 1
+
     view "winery"
 end
 
@@ -148,5 +151,15 @@ post "/winery/:wid/check_in/create" do
     @winery = wineries_table.where(:wid => params["wid"]).to_a[0]
     view "create_checkin"
 end
-    
+
+get "/send_text" do
+    client = Twilio::REST::Client.new(account_sid, auth_token)
+    client.messages.create(
+        from: "+12013576950", 
+        to: "number",
+        body: "Hey KIEI-451!"
+        )
+
+    view "new_text"
+end
     
