@@ -62,7 +62,8 @@ get "/wineries/:wid" do
     @winecategory_table = winecategory_table
     @winecategory_count = 1
     @sum_rating = visits_table.where(:wid => params["wid"]).sum(:rating)
-    @avg_rating = @sum_rating/@visit_count
+    @avg_rating_gross = @sum_rating/@visit_count
+    @avg_rating = @avg_rating_gross.round(0) 
     @review = visits_table.where(:wid => params["wid"]).to_a
     @website = @winery[:website]
     @test_number = 1
@@ -166,7 +167,8 @@ get "/send_text/:wid" do
     @winecategory_table = winecategory_table
     @winecategory_count = 1
     @sum_rating = visits_table.where(:wid => params["wid"]).sum(:rating)
-    @avg_rating = @sum_rating/@visit_count
+    @avg_rating_gross = @sum_rating/@visit_count
+    @avg_rating = @avg_rating_gross.round(0) 
     @review = visits_table.where(:wid => params["wid"]).to_a
     @website = @winery[:website]
     @test_number = 1

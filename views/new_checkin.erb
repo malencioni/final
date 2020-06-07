@@ -11,16 +11,25 @@
 <div class="col-6">
 <form action="/winery/<%= @winery[:wid] %>/check_in/create" method="POST">
     <div class="form-group">
-        <label>What Day Did You Go?</label>
-        <input type="date" class="form-control" name="date">
+        <label>When did you go?</label>
+        <input type="date" class="form-control" name="date" oninvalid="this.setCustomValidity('Date is Required')" oninput="setCustomValidity('')" required>
     </div>
     <div class="form-group">    
         <label>How was it?</label>
-        <input type="number" class="form-control" placeholder = "Review" name="rating">
+        <select class="form-control" name="rating" oninvalid="this.setCustomValidity('Rating is required')" oninput="setCustomValidity('')" required>
+            <option value="" selected disabled>Select a Rating</option>
+            <option>5 - Awesome</option>
+            <option>4 - Good</option>
+            <option>3 - Average</option>
+            <option>2 - Bad</option>
+            <option>1 - Awful</option>
+        </select>
+       
     </div>
     <div class="form-group">  
-        <textarea class="form-control" rows="3" name="review" placeholder="Comments"></textarea>
+        <textarea class="form-control" rows="3" name="review" placeholder="Comments" oninvalid="this.setCustomValidity('Comments are Required')" oninput="setCustomValidity('')" required></textarea>
     </div>
    
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+

@@ -56,21 +56,33 @@
 <div class="row">
     <div class="col-lg-7">
         <div class="container">
-            <h5 class="font_less_thin" style="margin-bottom: 0rem; margin-top: 1.5rem;">Reviews<span class="pull-right" style="padding-left: 10px;">
-            <a style="font-size: 12px;">Rating: <%= @avg_rating %></a>
+            <h5 class="font_less_thin" style="margin-bottom: 0.5rem; margin-top: 1.5rem;">Reviews<span class="pull-right" style="padding-left: 10px;">
+                <% if @avg_rating == 5 %>
+                    <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> </a>
+                <%elsif @avg_rating == 4 %>
+                    <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> </a>
+                <%elsif @avg_rating == 3 %>
+                    <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a>
+                <%elsif @avg_rating == 2 %>
+                    <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a>
+                <%elsif @avg_rating == 1 %>
+                    <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a>
+                <%else%>
+                    <a style="font-size: 12px;">Rating: <%= @avg_rating %></a>
+                <%end%>
+                <a style="font-size:17px" class="font_less_thin">(<%= @visit_count %>)</a>
             </span></h5>
-            <p style="margin-bottom: 0.5rem;">Visits: <%= @visit_count %></p>
             <% for comment in @review %>
                 <div class="container border-top">
                 <% @reviewers = @users_table.where(:uid => comment[:uid]).to_a[0]%>
                 <% unless @reviewers.nil? %>
                     <div style="padding-top:5px;">
                     <a><%= comment[:rating] %></a>
-                    <p class="font_thin" style="padding-top:5px; padding-bottom:5px"><%= comment[:review] %></p>
+                    <p class="font_thin" style="padding-top:5px; padding-bottom:5px; margin-bottom: 0rem;"><%= comment[:review] %></p>
                     <% if @current_user.nil? %>
-                        <p class="font_thin" style="text-align:right; font-style: italic; font-size:15px">name hidden</p>
+                        <p class="font_thin" style="text-align:right; margin-bottom: 0.5rem; margin-block-start: 0em; font-style: italic; font-size:15px">name hidden</p>
                     <%else%>
-                        <p class="font_thin" style="text-align:right; font-style: italic; font-size:15px">-<%= @reviewers[:fname]%> <%= @reviewers[:lname]%></p>
+                        <p class="font_thin" style="text-align:right; margin-bottom: 0.5rem; margin-block-start: 0em; font-style: italic; font-size:15px">-<%= @reviewers[:fname]%> <%= @reviewers[:lname]%></p>
                     <%end%>
                     </div>
                 <%end%>
