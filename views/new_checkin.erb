@@ -7,29 +7,37 @@
 
 <div class="container box-float">
 
-<h1>Check In at <%= @winery[:name] %></h1>
-<div class="col-6">
-<form action="/winery/<%= @winery[:wid] %>/check_in/create" method="POST">
-    <div class="form-group">
-        <label>When did you go?</label>
-        <input type="date" class="form-control" name="date" oninvalid="this.setCustomValidity('Date is Required')" oninput="setCustomValidity('')" required>
+    <h1 class="font_less_thin" style="font-size:38px;">Check In at <%= @winery[:name] %></h1>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="/winery/<%= @winery[:wid] %>/check_in/create" method="POST">
+                <div class="form-group">
+                    <label class="font_less_thin">When did you go?</label>
+                    <input type="date" class="form-control font_thin" name="date" oninvalid="this.setCustomValidity('Date is Required')" oninput="setCustomValidity('')" required>
+                </div>
+                <div class="form-group">    
+                    <label class="font_less_thin">How was it?</label>
+                    <select class="form-control font_thin" name="rating" oninvalid="this.setCustomValidity('Rating is required')" oninput="setCustomValidity('')" required>
+                        <option value="" selected disabled>Select a Rating</option>
+                        <option>5 - Awesome</option>
+                        <option>4 - Good</option>
+                        <option>3 - Average</option>
+                        <option>2 - Bad</option>
+                        <option>1 - Awful</option>
+                    </select>
+                
+                </div>
+                <div class="form-group">  
+                    <textarea class="form-control font_thin" rows="3" name="review" placeholder="Comments" oninvalid="this.setCustomValidity('Comments are Required')" oninput="setCustomValidity('')" required></textarea>
+                </div>
+            
+            <button type="submit" class="btn btn-primary font_less_thin">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="container">
+            <img src="/images/check_in.jpg" class="img-fluid" style="padding-bottom:10px;" alt="Responsive image">
+            </div>
+        </div>
     </div>
-    <div class="form-group">    
-        <label>How was it?</label>
-        <select class="form-control" name="rating" oninvalid="this.setCustomValidity('Rating is required')" oninput="setCustomValidity('')" required>
-            <option value="" selected disabled>Select a Rating</option>
-            <option>5 - Awesome</option>
-            <option>4 - Good</option>
-            <option>3 - Average</option>
-            <option>2 - Bad</option>
-            <option>1 - Awful</option>
-        </select>
-       
-    </div>
-    <div class="form-group">  
-        <textarea class="form-control" rows="3" name="review" placeholder="Comments" oninvalid="this.setCustomValidity('Comments are Required')" oninput="setCustomValidity('')" required></textarea>
-    </div>
-   
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
+</div>

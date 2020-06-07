@@ -1,0 +1,45 @@
+<style>
+  body, html {
+      height:100%;
+      margin:0;
+  }
+</style>
+
+<div class="container box-float">
+  <div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="font_less_thin">Welcome <%= @current_user[:fname]%> </h1>
+            <h5 class="font_less_thin">Your Visits</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Winery</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @user_review_number = 1%>
+                    <% for review in @user_review %>
+                        <% @winery = @wine_spot.where([:wid] => review[:wid]).to_a[0] %>
+                        <tr>
+                            <th scope="row"><%=@user_review_number%></th>
+                            <td><%=review[:visit_date].strftime('%B %-d, %Y')%></td>
+                            <td><a href="/wineries/<%=@winery[:wid]%>" style="color: black;"><%=@winery[:name]%></td>
+                            <td><%=review[:rating]%></td>
+                            <td><%=review[:review]%></td>
+                        </tr>
+
+                        <% @user_review_number = @user_review_number + 1 %>
+                    <%end%>
+                </tbody>
+            </table>
+        <p><a href="/" class="btn btn-primary">Go Home</a></p>
+        
+        </div>
+    </div>
+  </div>
+</div>

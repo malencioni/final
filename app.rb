@@ -193,3 +193,19 @@ get "/send_text/:wid" do
     view "winery"
 end
     
+# View Your Account
+get "/account/:uid" do
+    @users_table = users_table
+    @user_review = visits_table.where(:uid => params["uid"]).to_a
+    @wine_spot = wineries_table
+    view "my_account"
+end
+
+# View All Wineries
+get "/all/wineries" do
+    @regions_table2 = regions_table
+    @wineries_place1 = wineries_table
+    @visits_table = visits_table
+    view "wineries_all"
+end
+

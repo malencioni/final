@@ -1,0 +1,58 @@
+<style>
+  body, html {
+      height:100%;
+      margin:0;
+  }
+</style>
+<div class="container box-float">
+  <div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="font_less_thin">Wineries</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Region</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Visits</th>
+                    <th scope="col">Website</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for winery in @wineries_place1 %>
+                        <% @region = @regions_table2.where([:reid] => winery[:reid]).to_a[0] %>
+                        <% @visits_count1 = @visits_table.where([:wid] => winery[:wid]).count %>
+                        <% @sum_ratings = @visits_table.where([:wid] => winery[:wid]).sum(:rating) %>
+                        <% @total_ratings = @sum_ratings/@visits_count1 %>
+                        <% @total_ratings_round = @total_ratings.round(0) %>
+                        <tr>
+                            <td><%=@region[:description]%></td>
+                            <td><a href="/wineries/<%=winery[:wid]%>" style="color: black;"><%=winery[:name]%></td>
+                            <% if @total_ratings_round == 5 %>
+                                <td><a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> </a></td>
+                            <%elsif @total_ratings_round == 4 %>
+                                <td><a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> </a></td>
+                            <%elsif @total_ratings_round == 3 %>
+                                <td><a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a></td>
+                            <%elsif @total_ratings_round == 2 %>
+                                <td><a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a></td>
+                            <%elsif @total_ratings_round == 1 %>
+                                <td><a style="font-size:15px"><i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a></td>
+                            <%else%>
+                                <td><a style="font-size: 12px;">Rating: <%= @total_ratings_round %></a></td>
+                            <%end%>
+                            <td><%=@visits_count1%></td>
+                            <td><a class="btn btn-primary font_less_thin" target="_blank" href= "<%=winery[:website]%>" role="button" style="padding: 4px; font-size: 15px;">Visit <%=winery[:name]%></td>
+                        </tr>
+                    <%end%>
+                </tbody>
+            </table>
+        <p><a href="/" class="btn btn-primary">Go Home</a></p>
+
+
+        </div>
+    </div>
+  </div>
+</div>
+
