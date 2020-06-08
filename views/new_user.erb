@@ -6,7 +6,7 @@
 </style>
 <div class="container box-float">
 
-<h1>Sign Up</h1>
+<h1 class="font_less_thin">Sign Up</h1>
 
 <form action="/users/create" method="POST">
     <div class="form-group">
@@ -25,9 +25,11 @@
         <label>Password</label>
         <input type="password" class="form-control" name="password" oninvalid="this.setCustomValidity('Password is Required')" oninput="setCustomValidity('')" required>
     </div>
+
     <div class="form-group">
         <label>Phone Number</label>
-        <input type="number" class="form-control" name="phone" maxlength="10" oninvalid="this.setCustomValidity('Phone Number is Required')" oninput="setCustomValidity('')" required>
+        <small>*Format: 1234567890</small>
+        <input type="tel" class="form-control" name="phone" pattern="[0-9]{10}" oninvalid="this.setCustomValidity('Phone Number is Required')" oninput="setCustomValidity('')" required>
     </div>
     <div class="form-group">
         <label>City</label>
@@ -39,3 +41,5 @@
     </div>
   <button type="submit" class="btn btn-primary">Sign Up</button>
 </form>
+
+

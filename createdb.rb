@@ -317,7 +317,7 @@ visits_table.insert(wid: "1",
                     uid: "1",
                     visit_date: "2020-05-28",
                     rating: "5",
-                    review: "This is another test"
+                    review: "This place is great"
                     )
 
 visits_table = DB.from(:visits)
@@ -325,7 +325,7 @@ visits_table.insert(wid: "2",
                     uid: "1",
                     visit_date: "2020-05-28",
                     rating: "5",
-                    review: "This is another test"
+                    review: "I enjoyed my time here"
                     )
 
 visits_table = DB.from(:visits)
@@ -333,7 +333,7 @@ visits_table.insert(wid: "3",
                     uid: "1",
                     visit_date: "2020-05-28",
                     rating: "5",
-                    review: "This is another test"
+                    review: "We had a lot of fun."
                     )
 
 visits_table = DB.from(:visits)
@@ -341,7 +341,7 @@ visits_table.insert(wid: "4",
                     uid: "1",
                     visit_date: "2020-05-28",
                     rating: "5",
-                    review: "This is another test"
+                    review: "I can't wait to go back."
                     )
 
 visits_table = DB.from(:visits)
@@ -349,7 +349,7 @@ visits_table.insert(wid: "5",
                     uid: "1",
                     visit_date: "2020-05-28",
                     rating: "5",
-                    review: "This is another test"
+                    review: "Everyone should visit."
                     )
 
 visits_table = DB.from(:visits)
@@ -357,7 +357,7 @@ visits_table.insert(wid: "6",
                     uid: "1",
                     visit_date: "2020-05-28",
                     rating: "5",
-                    review: "This is another test"
+                    review: "Be sure to add this one to your list."
                     )
 
 
@@ -371,3 +371,52 @@ winecategory_table.insert(wcid: "2",
 winecategory_table.insert(wcid: "3",
                         description: "Sparkling"
 )
+
+
+visits_table = DB.from(:visits)
+visits_table.insert(wid: "1",
+                    uid: "2",
+                    visit_date: "2020-05-28",
+                    rating: "3",
+                    review: "This place was just ok"
+                    )
+
+visits_table = DB.from(:visits)
+visits_table.insert(wid: "2",
+                    uid: "2",
+                    visit_date: "2020-05-28",
+                    rating: "5",
+                    review: "We had fun, I will come again."
+                    )
+
+visits_table = DB.from(:visits)
+visits_table.insert(wid: "3",
+                    uid: "2",
+                    visit_date: "2020-05-28",
+                    rating: "5",
+                    review: "We recommend you visit here, so much fun."
+                    )
+
+visits_table = DB.from(:visits)
+visits_table.insert(wid: "4",
+                    uid: "2",
+                    visit_date: "2020-05-28",
+                    rating: "5",
+                    review: "One of the best in California."
+                    )
+
+visits_table = DB.from(:visits)
+visits_table.insert(wid: "5",
+                    uid: "2",
+                    visit_date: "2020-05-28",
+                    rating: "5",
+                    review: "Be sure not to miss this one."
+                    )
+
+visits_table = DB.from(:visits)
+visits_table.insert(wid: "6",
+                    uid: "2",
+                    visit_date: "2020-05-28",
+                    rating: "3",
+                    review: "This place was fine, but it was nothing special."
+                    )
