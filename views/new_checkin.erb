@@ -13,7 +13,8 @@
             <form action="/winery/<%= @winery[:wid] %>/check_in/create" method="POST">
                 <div class="form-group">
                     <label class="font_less_thin">When did you go?</label>
-                    <input type="date" class="form-control font_thin" name="date" oninvalid="this.setCustomValidity('Date is Required')" oninput="setCustomValidity('')" required>
+                    <input type="date" class="form-control font_thin" name="date" pattern="[0-9]{1}[0-9]{1}/[0-9]{1}[0-9]{1}/[0-9]{1}[0-9]{1}[0-9]{1}[0-9]{1}" oninvalid="this.setCustomValidity('Date is Required and must be MM/DD/YYYY')" oninput="setCustomValidity('')" required>
+                    <small>*Format: MM/DD/YYYY</small>
                 </div>
                 <div class="form-group">    
                     <label class="font_less_thin">How was it?</label>
