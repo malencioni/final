@@ -96,3 +96,72 @@
 </div>
 
 <button class="btn btn-primary font_less_thin" style="padding: 4px; font-size: 12px;" onclick="<%number_test%>">Send Link to my Phone</button>
+
+
+        elsif
+            @sent_message.nil?
+            @user_phone = @current_user[:phone]
+            @check_phone = users_table.where([:uid]=>"3").to_a[0]
+            if @user_phone = @check_phone[:phone]
+            @number = "+1".concat(@user_phone)
+            @sms_body = @winery_name_table[:name].concat(" - ").concat(@winery[:address1]).concat(", ").concat(@winery[:city]).concat(", ").concat(@winery[:state]).concat(" ").concat(@winery[:zip]).concat(" - ").concat(@winery[:website])
+            @sent_message = "Your message has been sent"
+            client.messages.create(
+                from: "+12013576950", 
+                to: @number,
+                body: @sms_body
+                )
+        else
+        @wrong_phone = "You put in the wrong number, bro"
+        end
+    else   
+        @sent_message = "Your message has been sent"
+
+
+
+
+
+
+
+
+            @users_table = users_table
+    # SELECT * FROM events WHERE id=:id
+    @winery = wineries_table.where(:wid => params["wid"]).to_a[0]
+    # SELECT * FROM rsvps WHERE event_id=:id
+    @visits = visits_table.where(:vid => params["vid"]).to_a
+    # SELECT COUNT(*) FROM rsvps WHERE event_id=:id AND going=1
+    @visit_count = visits_table.where(:wid => params["wid"]).count
+    @winerywines_table = winerywines_table.where(:wid => params["wid"]).to_a
+    @winerywines_table2 = winerywines_table
+    @winetypes_table = winetypes_table.order_by(:description)
+    @winecategory_table = winecategory_table
+    @winecategory_count = 1
+    @sum_rating = visits_table.where(:wid => params["wid"]).sum(:rating)
+    @avg_rating_gross = @sum_rating/@visit_count
+    @avg_rating = @avg_rating_gross.round(0) 
+    @review = visits_table.where(:wid => params["wid"]).to_a
+    @website = @winery[:website]
+    @test_number = 1
+    @winery_name_table = wineries_table.where(:wid => params["wid"]).to_a[0]
+    
+    if @current_user.nil?
+        @sign_in_first = "You need to sign in first"
+    elsif
+        @sent_message.nil?
+        @user_phone = @current_user[:phone]
+        @check_phone = users_table.where([:uid]=>"3").to_a[0]
+        if @user_phone = @check_phone[:phone]
+        @number = "+1".concat(@user_phone)
+        @sms_body = @winery_name_table[:name].concat(" - ").concat(@winery[:address1]).concat(", ").concat(@winery[:city]).concat(", ").concat(@winery[:state]).concat(" ").concat(@winery[:zip]).concat(" - ").concat(@winery[:website])
+        @sent_message = "Your message has been sent"
+        client.messages.create(
+            from: "+12013576950", 
+            to: @number,
+            body: @sms_body
+            )
+        else
+        @wrong_phone = "You put in the wrong number, bro"
+        end
+    else   
+        @sent_message = "Your message has been sent"
+    end

@@ -1,4 +1,12 @@
-<%redirect @redirect %>
+<% if @current_user.nil? %>
+    <% redirect "/wineries/".concat(params["wid"]).concat("/1") %>
+
+<% elsif @user_phone == @check_phone[:phone] %>
+
+    <% redirect "/create_text/".concat(params["wid"]) %>
+<% else %>   
+    <% redirect "/wineries/".concat(params["wid"]).concat("/3") %>
+<% end %>
 
 <style>
   body, html {

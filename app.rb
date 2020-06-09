@@ -5,7 +5,8 @@ require "sequel"                                                                
 require "logger"                                                                      #
 require "twilio-ruby"                                                                 #
 require "geocoder"                                                                    #
-require "bcrypt"                                                                    #
+require "bcrypt"          
+require "uri"                                                                         #
 connection_string = ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite3"  #
 DB ||= Sequel.connect(connection_string)                                              #
 DB.loggers << Logger.new($stdout) unless DB.loggers.size > 0                          #
@@ -47,7 +48,7 @@ get "/" do
 end
 
 # Show a single winery
-get "/wineries/:wid" do
+get "/wineries/:wid/?:button_push?" do
     @users_table = users_table
     # SELECT * FROM events WHERE id=:id
     @winery = wineries_table.where(:wid => params["wid"]).to_a[0]
@@ -65,6 +66,12 @@ get "/wineries/:wid" do
     @review = visits_table.where(:wid => params["wid"]).to_a
     @website = @winery[:website]
     @test_number = 1
+    @winery_name_table = wineries_table.where(:wid => params["wid"]).to_a[0]
+    if params["button_push"].nil?
+        @button_push = nil
+    else
+        @button_push = params["button_push"]
+    end
 
     view "winery"
 end
@@ -152,43 +159,30 @@ post "/winery/:wid/check_in/create" do
 end
 
 get "/send_text/:wid" do
-    @users_table = users_table
-    # SELECT * FROM events WHERE id=:id
-    @winery = wineries_table.where(:wid => params["wid"]).to_a[0]
-    # SELECT * FROM rsvps WHERE event_id=:id
-    @visits = visits_table.where(:vid => params["vid"]).to_a
-    # SELECT COUNT(*) FROM rsvps WHERE event_id=:id AND going=1
-    @visit_count = visits_table.where(:wid => params["wid"]).count
-    @winerywines_table = winerywines_table.where(:wid => params["wid"]).to_a
-    @winerywines_table2 = winerywines_table
-    @winetypes_table = winetypes_table.order_by(:description)
-    @winecategory_table = winecategory_table
-    @winecategory_count = 1
-    @sum_rating = visits_table.where(:wid => params["wid"]).sum(:rating)
-    @avg_rating_gross = @sum_rating/@visit_count
-    @avg_rating = @avg_rating_gross.round(0) 
-    @review = visits_table.where(:wid => params["wid"]).to_a
-    @website = @winery[:website]
-    @test_number = 1
     @winery_name_table = wineries_table.where(:wid => params["wid"]).to_a[0]
-    
-    if @current_user.nil?
-        @sign_in_first = "You need to sign in first"
-    elsif
-        @sent_message.nil?
+    @winery = wineries_table.where(:wid => params["wid"]).to_a[0]
+    unless @current_user.nil?
         @user_phone = @current_user[:phone]
-        @number = "+1".concat(@user_phone)
-        @sms_body = @winery_name_table[:name].concat(" - ").concat(@winery[:address1]).concat(", ").concat(@winery[:city]).concat(", ").concat(@winery[:state]).concat(" ").concat(@winery[:zip]).concat(" - ").concat(@winery[:website])
-        @sent_message = "Your message has been sent"
-        client.messages.create(
-            from: "+12013576950", 
-            to: @number,
-            body: @sms_body
-            )
-    else   
-        @sent_message = "Your message has been sent"
+        @check_phone = users_table.where([:uid]=>"3").to_a[0]
     end
-    view "winery"
+    view "new_text"
+end
+
+get "/create_text/:wid" do
+    @winery_name_table = wineries_table.where(:wid => params["wid"]).to_a[0]
+    @winery = wineries_table.where(:wid => params["wid"]).to_a[0]
+    unless @current_user.nil?
+        @user_phone = @current_user[:phone]
+        @check_phone = users_table.where([:uid]=>"3").to_a[0]
+            @number = "+1".concat(@user_phone)
+            @sms_body = @winery_name_table[:name].concat(" - ").concat(@winery[:address1]).concat(", ").concat(@winery[:city]).concat(", ").concat(@winery[:state]).concat(" ").concat(@winery[:zip]).concat(" - ").concat(@winery[:website])
+            client.messages.create(
+                from: "+12013576950", 
+                to: @number,
+                body: @sms_body
+                )
+    end
+    view "create_text"
 end
     
 # View Your Account

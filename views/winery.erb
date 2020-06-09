@@ -124,14 +124,19 @@
                 <div class="col">
                     <span>
                     <a class="btn btn-primary font_less_thin" target="_blank" href= "<%=@website%>" role="button" style="padding: 4px; font-size: 12px;">Visit Website</a>
-                    <% if @sign_in_first.nil? %>
-                        <% if @sent_message.nil? %>
-                            <a class="btn btn-primary font_less_thin" href= "/send_text/<%= params[:wid] %>" role="button" style="padding: 4px; font-size: 12px;">Send Link to my Phone</a>
-                        <% else %>
-                            <a style="color: green;"><%=@sent_message%> <i class="fas fa-check"></i></a>
-                        <%end%>
+                    <% if @button_push.nil? %>
+                        <a class="btn btn-primary font_less_thin" href= "/send_text/<%= params[:wid] %>" role="button" style="padding: 4px; font-size: 12px;">Send Link to my Phone</a>
                     <% else %>
-                        <a style="color: red;" href= "/logins/new"><i class="fas fa-times"></i> <%=@sign_in_first%></a>
+                        <% if @button_push == "1" %>
+                            <a style="color: red;" href= "/logins/new"><i class="fas fa-times"></i> You need to sign in first</a>
+                        
+                        <% elsif @button_push == "3" %>
+                            <a style="color: red;"><i class="fas fa-times"></i> Your phone number doesn't match the test number, please refer to the assignment submission notes</a>
+                        
+                        <% elsif @button_push == "2" %>
+                            <a style="color: green;"> Your message has been sent <i class="fas fa-check"></i></a>
+                        <% else %>
+                        <%end%>
                     <% end %>
                     </span>
                 </div>
