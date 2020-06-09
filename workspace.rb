@@ -80,3 +80,9 @@ end
         to: @number,
         body: "Hey KIEI-451!"
         )
+
+
+                                <% @winery_winecategory2 = @winetypes_table3.where([:wcid] => @wine_category[:wcid]) %>
+                        <% @thisthatandanother = @winerywines_table2.where([:wid] => params["wid"])%>
+                        <% @thisthatandanother1 = @thisthatandanother#{:wid}
+                        <% @thatotherthing =  @thisthatandanother.where([:wtid] => @winery_winecategory2[:wtid])%>

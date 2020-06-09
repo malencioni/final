@@ -22,23 +22,30 @@
             <div class="row" style="padding-top:10px;">
                 <% @winecategory_count = 1 %>
           
+          <h5 class="border-bottom font_less_thin"></h5>
+                        <% @wine_category = @winecategory_table.where([:wcid] => @winecategory_count).to_a[0] %>
 
+          
                 <% for categories in @winecategory_table %>
                     <div class="col">
-                        <% @wine_category = @winecategory_table.where([:wcid] => @winecategory_count).to_a[0]%>
-                        <h5 class="border-bottom font_less_thin"> <%= @wine_category[:description] %></h5>
+                        <% @wine_category = @winecategory_table.where([:wcid] => @winecategory_count).to_a[0] %>
+                        <h5 class="border-bottom font_less_thin"> <%= @wine_category[:category_description] %></h5>                        
                         <ul class="nobull">
                             <% for type in @winerywines_table%>
                                 <% @wines_types = @winetypes_table.where(:wtid => type[:wtid]).where(:wcid => @winecategory_count).to_a[0]%>
                                 <% unless @wines_types.nil? %>
+                                <% @wines_types_sorted = @wines_types.sort %>
                                 <li class="font_thin" style="font-size:15px;"><%= @wines_types[:description] %></li>
                             <% end %>
+                        <%end%>
 
-                        <% end %>
                         </ul>
                     </div>
                     <% @winecategory_count =  @winecategory_count + 1 %>
                 <%end%>
+
+                
+                
             </div>
         </div>
     </div>

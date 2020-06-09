@@ -34,7 +34,7 @@ client = Twilio::REST::Client.new(account_sid, auth_token)
 before do
     # SELECT * FROM users WHERE id = session[:user_id]
     @current_user = users_table.where(:uid => session[:uid]).to_a[0]
-    @wineries = wineries_table.all
+    @wineries = wineries_table.order_by(:name)
     @regions_table = regions_table 
     puts @current_user.inspect
 end
@@ -42,7 +42,6 @@ end
 # Home page (all wineries)
 get "/" do
     # before stuff runs
-    @wineries = wineries_table.all
     @regions_table = regions_table 
     view "wineries"
 end
@@ -57,8 +56,7 @@ get "/wineries/:wid" do
     # SELECT COUNT(*) FROM rsvps WHERE event_id=:id AND going=1
     @visit_count = visits_table.where(:wid => params["wid"]).count
     @winerywines_table = winerywines_table.where(:wid => params["wid"]).to_a
-    @winerywines_table2 = winerywines_table
-    @winetypes_table = winetypes_table
+    @winetypes_table = winetypes_table.order_by(:description)
     @winecategory_table = winecategory_table
     @winecategory_count = 1
     @sum_rating = visits_table.where(:wid => params["wid"]).sum(:rating)
@@ -163,7 +161,7 @@ get "/send_text/:wid" do
     @visit_count = visits_table.where(:wid => params["wid"]).count
     @winerywines_table = winerywines_table.where(:wid => params["wid"]).to_a
     @winerywines_table2 = winerywines_table
-    @winetypes_table = winetypes_table
+    @winetypes_table = winetypes_table.order_by(:description)
     @winecategory_table = winecategory_table
     @winecategory_count = 1
     @sum_rating = visits_table.where(:wid => params["wid"]).sum(:rating)
@@ -204,11 +202,7 @@ end
 # View All Wineries
 get "/all/wineries" do
     @regions_table2 = regions_table
-    @wineries_place1 = wineries_table
+    @wineries_place1 = wineries_table.order_by(:name)
     @visits_table = visits_table
     view "wineries_all"
-end
-
-get "/tooltip" do
-    view "tooltip"
 end

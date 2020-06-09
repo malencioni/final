@@ -79,7 +79,7 @@ end
 
 DB.create_table! :winecategory do
     primary_key :wcid
-    String :description
+    String :category_description
 end
 
 # Insert initial (seed) data
@@ -363,13 +363,13 @@ visits_table.insert(wid: "6",
 
 winecategory_table = DB.from(:winecategory)
 winecategory_table.insert(wcid: "1",
-                        description: "Red"
+                        category_description: "Red"
 )
 winecategory_table.insert(wcid: "2",
-                        description: "White"
+                        category_description: "White"
 )
 winecategory_table.insert(wcid: "3",
-                        description: "Sparkling"
+                        category_description: "Sparkling"
 )
 
 
