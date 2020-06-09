@@ -116,10 +116,10 @@
                 height="250"
                 frameborder="0" 
                 style="border:0"
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw&q=<%= @winery[:address1]%>+<%= @winery[:city]%> + <%= @winery[:state]%> + <%= @winery[:zip]%>&zoom=15" allowfullscreen>
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw&q=<%= @winery[:name]%> + <%= @winery[:address1]%>+<%= @winery[:city]%> + <%= @winery[:state]%> + <%= @winery[:zip]%>&zoom=15" allowfullscreen>
             </iframe>
         </div>
-            <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=<%= @winery[:address1]%>+<%= @winery[:city]%> + <%= @winery[:state]%> + <%= @winery[:zip]%>"><%= @winery[:address1]%>, <%= @winery[:city]%>, <%= @winery[:state]%> <%= @winery[:zip]%></a>
+            <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=<%= @winery[:name]%>+<%= @winery[:address1]%>+<%= @winery[:city]%> + <%= @winery[:state]%> + <%= @winery[:zip]%>"><%= @winery[:address1]%>, <%= @winery[:city]%>, <%= @winery[:state]%> <%= @winery[:zip]%></a>
             <div class="row" style="padding-top: 10px;" >
                 <div class="col">
                     <span>
