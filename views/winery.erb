@@ -1,7 +1,51 @@
+<head>
 
+<!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Rating');
+        data.addColumn('number', 'Visits');
+        data.addRows([
+          ['5', <%=@visits_table.where(:wid => params["wid"]).where(:rating => "5").count.to_i %>],
+          ['4', <%=@visits_table.where(:wid => params["wid"]).where(:rating => "4").count.to_i %>],
+          ['3', <%=@visits_table.where(:wid => params["wid"]).where(:rating => "3").count.to_i %>],
+          ['2', <%=@visits_table.where(:wid => params["wid"]).where(:rating => "2").count.to_i %>],
+          ['1', <%=@visits_table.where(:wid => params["wid"]).where(:rating => "1").count.to_i %>]
+        ]);
+
+        // Set chart options
+        var options = {
+                       'width':250,
+                       'height':100,
+                       'legend':'none',
+                       colors: ['#8e048e'],
+                       enableInteractivity: false,
+                       hAxis: { textPosition: 'none',
+                           gridlines: {count: '0'}}
+                       };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+</head>
 
 <div class="container box-float">
-
 <div class="row">
     <div class="col-lg-7">
         <div class="container">
@@ -61,24 +105,32 @@
 
 </div>
 <div class="row">
-    <div class="col-lg-7">
+    <div class="col-md-7">
         <div class="container">
-            <h5 class="font_less_thin" style="margin-bottom: 0.5rem; margin-top: 1.5rem;">Reviews<span class="pull-right" style="padding-left: 10px;">
-                <% if @avg_rating == 5 %>
-                    <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> </a>
-                <%elsif @avg_rating == 4 %>
-                    <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> </a>
-                <%elsif @avg_rating == 3 %>
-                    <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a>
-                <%elsif @avg_rating == 2 %>
-                    <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a>
-                <%elsif @avg_rating == 1 %>
-                    <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a>
-                <%else%>
-                    <a style="font-size: 12px;">Rating: <%= @avg_rating %></a>
-                <%end%>
-                <a style="font-size:17px" class="font_less_thin">(<%= @visit_count %>)</a>
-            </span></h5>
+            <div class="row">
+                <div class="col-lg">
+                    <h5 class="font_less_thin" style="margin-bottom: 0.5rem; margin-top: 1.5rem;">Reviews<span class="pull-right" style="padding-left: 10px;">
+                        <% if @avg_rating == 5 %>
+                            <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> </a>
+                        <%elsif @avg_rating == 4 %>
+                            <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> </a>
+                        <%elsif @avg_rating == 3 %>
+                            <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a>
+                        <%elsif @avg_rating == 2 %>
+                            <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a>
+                        <%elsif @avg_rating == 1 %>
+                            <a style="font-size:15px"><i class="fas fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> <i class="far fa-star review"></i> </a>
+                        <%else%>
+                            <a style="font-size: 12px;">Rating: <%= @avg_rating %></a>
+                        <%end%>
+                        <a style="font-size:17px" class="font_less_thin">(<%= @visit_count %>)</a>
+                    </span></h5>
+                </div>
+                <div class="col-lg">
+                <div id="chart_div"></div>
+                </div>
+            </div>
+        </div>
             <% for comment in @review %>
                 <div class="container border-top">
                 <% @reviewers = @users_table.where(:uid => comment[:uid]).to_a[0]%>
@@ -108,8 +160,8 @@
                 </div>
             <% end %>
         </div>
-    </div>
-    <div class="col-lg-5">
+
+    <div class="col-md-5">
         <div class="map-responsive">
             <iframe
                 width="435"

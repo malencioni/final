@@ -66,6 +66,8 @@ get "/wineries/:wid/?:button_push?" do
     @website = @winery[:website]
     @test_number = 1
     @winery_name_table = wineries_table.where(:wid => params["wid"]).to_a[0]
+    @visits_table = visits_table
+    @rating_5 = visits_table.where(:wid => params["wid"]).where(:rating => "5").count
     if params["button_push"].nil?
         @button_push = nil
     else
