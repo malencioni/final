@@ -5,7 +5,10 @@ require "sequel"                                                                
 require "logger"                                                                      #
 require "twilio-ruby"                                                                 #
 require "geocoder"                                                                    #
-require "bcrypt"                                                                      #
+require "bcrypt"  
+require 'jwt'
+require 'rest-client'
+require 'json'                                                                    #
 connection_string = ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite3"  #
 DB ||= Sequel.connect(connection_string)                                              #
 DB.loggers << Logger.new($stdout) unless DB.loggers.size > 0                          #
@@ -26,6 +29,38 @@ users_table = DB.from(:users)
 winetypes_table = DB.from(:winetypes)
 winecategory_table = DB.from(:winecategory)
 winerywines_table = DB.from(:winerywines)
+
+ps_endpoint = ENV['EINSTEIN_VISION_URL']
+subject = ENV['EINSTEIN_VISION_ACCOUNT_ID']
+private_key = String.new(ENV['EINSTEIN_VISION_PRIVATE_KEY'])
+private_key.gsub!('\n', "\n")
+expiry = Time.now.to_i + (60 * 15)
+
+# Read the private key string as Ruby RSA private key
+rsa_private = OpenSSL::PKey::RSA.new(private_key)
+
+# Build the JWT payload
+payload = {
+        :sub => subject,
+        :aud => "https://api.einstein.ai/v2/oauth2/token",
+        :exp => expiry
+    }
+
+# Sign the JWT payload
+assertion = JWT.encode payload, rsa_private, 'RS256'
+puts assertion
+
+# Call the OAuth endpoint to generate a token
+response = RestClient.post(ps_endpoint + 'v2/oauth2/token', {
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: assertion
+    })
+
+token_json = JSON.parse(response)
+puts "\nGenerated access token:\n"
+puts JSON.pretty_generate(token_json)
+
+access_token = token_json["access_token"]
 
 account_sid = ENV["TWILIO_ACCOUNT_SID"]
 auth_token = ENV["TWILIO_AUTH_TOKEN"]
