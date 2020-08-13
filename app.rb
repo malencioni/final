@@ -30,9 +30,9 @@ winetypes_table = DB.from(:winetypes)
 winecategory_table = DB.from(:winecategory)
 winerywines_table = DB.from(:winerywines)
 
-ps_endpoint = ENV['EINSTEIN_VISION_URL']
-subject = ENV['EINSTEIN_VISION_ACCOUNT_ID']
-private_key = String.new(ENV['EINSTEIN_VISION_PRIVATE_KEY'])
+ps_endpoint = ENV['EINSTEIN_VISION_MAUVE_URL']
+subject = ENV['EINSTEIN_VISION_MAUVE_ACCOUNT_ID']
+private_key = String.new(ENV['EINSTEIN_VISION_MAUVE_PRIVATE_KEY'])
 private_key.gsub!('\n', "\n")
 expiry = Time.now.to_i + (60 * 15)
 
