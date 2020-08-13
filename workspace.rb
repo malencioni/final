@@ -88,7 +88,7 @@ end
                         <% @thatotherthing =  @thisthatandanother.where([:wtid] => @winery_winecategory2[:wtid])%>
 
 
-
+###########################
 ps_endpoint = ENV['EINSTEIN_VISION_URL']
 subject = ENV['EINSTEIN_VISION_ACCOUNT_ID']
 private_key = String.new(ENV['EINSTEIN_VISION_PRIVATE_KEY'])
